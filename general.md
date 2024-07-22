@@ -21,6 +21,12 @@
 1. [Bisect](#bisect)
 	1. [The Seven Steps of a Bisect](#the-seven-steps-of-a-bisect)
 	1. [Automating the Bisect](#automating-the-bisect)
+1. [Worktrees](#worktrees)
+	1. [linked worktrees](#linked worktrees)
+		1. [deleting linked worktrees](#deleting-linked-worktrees)
+	1. [worktree utilities](#worktree utilities)
+	1. [limitataions](#limitations)
+	1. [worktree storage](#worktree-storage)
 
 
 ## Forks
@@ -260,4 +266,67 @@ current source code is good/old, and exit with a code between 1 and 127 (inclusi
 except 125, if the current source code is bad/new.
 ```
 
-after step 3, do the command shown above to automate it. That command will execute for every bisect selection
+after step 3, do the command shown above. It will run for each checkout
+
+
+## worktrees
+
+worktree aka working tree aka working directory
+
+a worktree is just the directory where the code you are tracking lives. Typically just the root of your repo, where .git is. But, you can have multiple worktrees at once
+
+> essentially you can create a copy of the repo to work in parallel, but it doesnt have to be a full clone. the .git just references back to another .git from the main worktree
+
+each repo has 1 main worktree. Thats where the original .git dir is. It can have many linked worktrees
+
+changes made in 1 worktree are instantly reflected in other worktrees, since its all the same .git
+
+
+### linked worktrees
+
+Create a linked work tree with:
+```
+git worktree add <path> [branch]
+```
+> the worktree will be created on a new branch by default. The branch name will be based off of the last part of 'path', unless branch is specified
+
+> If you create the worktree within another worktree, that other worktree will try to track inside the new worktree too.
+
+
+#### deleting linked worktrees
+
+```
+git worktree remove WORKTREE_PATH
+```
+removes the worktree from .git/ & deletes the directory
+
+OR you can delete the directory manually, then run:
+```
+git worktree prune
+```
+which automatically removes any worktrees whose directories no longer exist
+
+
+### worktree utilities
+
+`git worktree` has subcommands for working with worktrees
+
+```
+git worktree list
+```
+lists all the worktrees
+
+
+when running 'git branch', it will show branches that are checked out on other worktrees with a '+' (and blue)
+
+
+### Limitations
+
+a branch cannot be checked out by multiple worktrees at once
+
+
+### worktree storage
+
+worktree data is stored in .git/worktrees/
+
+the main worktree does not have an entry in .git/worktrees/
