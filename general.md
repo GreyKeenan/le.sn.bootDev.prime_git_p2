@@ -330,3 +330,29 @@ a branch cannot be checked out by multiple worktrees at once
 worktree data is stored in .git/worktrees/
 
 the main worktree does not have an entry in .git/worktrees/
+
+
+## Tags
+
+A tag is a named ptr to a commit. Unlike a branch, it never moves. Tags are commitish-es
+
+Tags can be deleted/created, but not changed.
+
+```
+git tag
+```
+lists all tags
+
+create a tag on the current commit:
+```
+git tag -a "tag name" -m "tag msg"
+```
+
+Tags will show in 'git log' as "tag: tagName"
+
+Tags are often used to point to releases.
+
+To push tags to the remote, do:
+```
+git push <remote> --tags
+```
