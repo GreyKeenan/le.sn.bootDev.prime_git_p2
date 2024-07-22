@@ -8,6 +8,9 @@
 1. [HEAD](#head)
 	1. [reflog](#reflog) *
 		1. [Recovering Deleted Work](#recovering-deleted-work)
+1. [Squashing](#squashing)
+	1. [caution](#caution)
+	1. [squashing with rebase](#squashing-with-rebase)
 
 
 ## Forks
@@ -52,6 +55,7 @@ displays a log of where the HEAD has been previously
 
 ` HEAD@{#} ` where # is the number of positions to move back on the reflog, 0 being current position, is a way to reference these positions in other cmds
 
+
 ### Recovering Deleted Work
 
 can see where head was previously with 'git reflog'. Then, checkout those commits even if you've deleted the branch
@@ -62,3 +66,36 @@ can see where head was previously with 'git reflog'. Then, checkout those commit
 > You can also just git checkout HEAD@{#} to the commit from the deleted branch
 
 You can also just merge to the HEAD@{#} directly
+
+
+## Squashing
+
+squashing takes the changes from a series of commits and puts them all together in a single commit
+
+> I already know generally how to squash, so idk how thorough these notes will be
+
+
+### caution
+
+squashing is a destructive action. Backups & performing squashing on temporary branches is recommended
+
+also, using --force is dangerous so uh yeah
+
+
+### squashing with rebase
+
+The primary way to squash is by using the 'rebase' cmd
+
+> this is because rebase is about replaying changes. Squashing is just re-applying that set of changes, but in a single commit
+
+```
+git rebase -i <commitish>
+```
+
+opens editor for an interactive squash. Yada yada. Can select which commits to squash or change in other ways. Guide is in the editor
+
+
+### forcing
+
+if rewriting history of a remote with a squash, need to push to that remote with the --force flag so git doesnt alert you and stop it
+
