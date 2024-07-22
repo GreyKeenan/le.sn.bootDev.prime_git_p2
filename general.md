@@ -11,9 +11,12 @@
 1. [Squashing](#squashing)
 	1. [caution](#caution)
 	1. [squashing with rebase](#squashing-with-rebase)
-1. [Stash](#stash)
+1. [Stash](#stash) *
 	1. [targeting a specific stash](#targeting-a-specific-stash)
 	1. [stash conflicts](#stash-conflicts)
+1. [Revert](#revert) *
+	1. [revert vs reset](#revert-vs-reset)
+1. [Diff](#diff) *
 
 
 ## Forks
@@ -152,3 +155,45 @@ when popping/applying, if there are conflicts, they are addressed similarly to m
 
 --ours = pre-stash-pop/apply
 --theirs = the new stash being applied
+
+
+## Revert
+
+revert is a safer and/or more precise tool than git reset
+
+Revert is an 'anti commit'. Rather than remove a commit, like reset, it creates a new commit which undoes the changes of the commit being reverted. That way, the history is preserved
+
+### use
+
+```
+git revert <commitish>
+```
+This will open txt editor for a commit msg for the new revert commit.
+
+
+### revert vs reset
+
+generally:
+- reset when working on your own branch or undoing something youve already committed
+- revert when undoing changes from a shared branch. Not rewriting history is preferred to not screw over other contributors
+
+
+## Diff
+
+'git diff' shows the difference/changes between two given commits
+
+```
+git diff
+```
+btwn working tree and HEAD commit
+
+```
+git diff <commitish>
+```
+btwn working tree and given commit
+
+```
+git diff <commitish1> <commitish2>
+```
+btwn two given commits
+> as in, changes applied to get from 1 to 2
