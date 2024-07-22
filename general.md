@@ -11,6 +11,9 @@
 1. [Squashing](#squashing)
 	1. [caution](#caution)
 	1. [squashing with rebase](#squashing-with-rebase)
+1. [Stash](#stash)
+	1. [targeting a specific stash](#targeting-a-specific-stash)
+	1. [stash conflicts](#stash-conflicts)
 
 
 ## Forks
@@ -99,3 +102,53 @@ opens editor for an interactive squash. Yada yada. Can select which commits to s
 
 if rewriting history of a remote with a squash, need to push to that remote with the --force flag so git doesnt alert you and stop it
 
+
+## Stash
+
+'git stash' is a way to stire the current state of the working directory & staging area, for later use.
+> useful to temporarily store a set of changes you are working on while you navigate the repo to something else, then return to it later
+
+```
+git stash
+```
+stashes the current state, and resets files to the HEAD commit
+
+```
+git stash list
+```
+lists stashes
+
+```
+git stash pop
+```
+un-stashes the most recent stash. It is no longer stored, & its changes/state are applied to the working dir
+
+```
+git stash -m "message"
+```
+
+```
+git stash apply
+```
+apply changes like pop, but without removing the stash
+
+```
+git stash drop
+```
+remove stash entry, without applying it
+
+
+### targeting a specific stash
+	
+```
+stash@{#}
+```
+where 0 = most recent stash
+
+
+### stash conflicts
+
+when popping/applying, if there are conflicts, they are addressed similarly to merge conflicts or rebase conflicts, just without the final steps of committing/rebasing
+
+--ours = pre-stash-pop/apply
+--theirs = the new stash being applied
