@@ -1,0 +1,64 @@
+
+# general notes for misc or small sections
+
+## index
+
+1. [Forks](#forks)
+1. [commitish](#commitish)
+1. [HEAD](#head)
+	1. [reflog](#reflog) *
+		1. [Recovering Deleted Work](#recovering-deleted-work)
+
+
+## Forks
+
+A fork is not a git feature. It is a feature of many git hosting services, like github. A fork is just a copy of the original repository, related through metadata and convention
+
+
+### general steps of forkinging
+
+1. fork repo to your acct
+1. create local clone of the forked repo
+1. create a new branch for your modifications
+1. make changes
+1. commit changes to remote of that new branch
+1. pull request to original repo from remote-new-branch
+
+
+## commitish
+
+a commitish is something that functions similarly to a commit hash in most cases, but is not a hash
+> like HEAD~1 or a branch name
+
+
+## HEAD
+
+HEAD represents where you are currently in the repo
+
+Check the head using:
+```
+cat .git/head
+```
+
+
+### reflog
+
+for "reference log"
+
+```
+git reflog
+```
+displays a log of where the HEAD has been previously
+
+` HEAD@{#} ` where # is the number of positions to move back on the reflog, 0 being current position, is a way to reference these positions in other cmds
+
+### Recovering Deleted Work
+
+can see where head was previously with 'git reflog'. Then, checkout those commits even if you've deleted the branch
+> Because, as established in p1, branches are just named ptrs to locations in the commit chain. Deleting a branchdoesnt delete that commit.
+
+> In tutorial, first showed using cat-file -p on the lost commit->tree->blob to find the deleted file directly.
+>
+> You can also just git checkout HEAD@{#} to the commit from the deleted branch
+
+You can also just merge to the HEAD@{#} directly
