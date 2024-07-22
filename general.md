@@ -17,6 +17,7 @@
 1. [Revert](#revert) *
 	1. [revert vs reset](#revert-vs-reset)
 1. [Diff](#diff) *
+1. [Cherry Pick](#cherry-pick)
 
 
 ## Forks
@@ -197,3 +198,15 @@ git diff <commitish1> <commitish2>
 ```
 btwn two given commits
 > as in, changes applied to get from 1 to 2
+
+
+## Cherry Pick
+
+A way to grab a commit from another branch, without grabbing the whole branch
+
+```
+git cherry-pick <commitish>
+```
+this grabs that commit and applies it after the current commit 
+
+> I suppose there cant really be conflicts, since its just one commit.
