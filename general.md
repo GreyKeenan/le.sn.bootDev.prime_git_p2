@@ -18,6 +18,9 @@
 	1. [revert vs reset](#revert-vs-reset)
 1. [Diff](#diff) *
 1. [Cherry Pick](#cherry-pick)
+1. [Bisect](#bisect)
+	1. [The Seven Steps of a Bisect](#the-seven-steps-of-a-bisect)
+	1. [Automating the Bisect](#automating-the-bisect)
 
 
 ## Forks
@@ -210,3 +213,51 @@ git cherry-pick <commitish>
 this grabs that commit and applies it after the current commit 
 
 > I suppose there cant really be conflicts, since its just one commit.
+
+
+## Bisect
+
+a tool for finding where bugs originated in a repo
+> or finding any abritrary change, not just a bug
+
+searching for the change in a list of all commits becomes O(log n) instead of O(n)
+
+
+### The seven steps of a bisect
+
+1. `git bisect start`
+2. select a "good" commit
+> this is a commit where you can be sure the bug is not present
+>
+> ` git bisect good <commitish> `
+
+3. select a bad commit
+> a commit where you know the bug is present
+>
+> ` git bisect bad <commitish> `
+
+4. git automatically selects a commit btwn good/bad, where you can check if the bug is present
+5. execute `git bisect good` or `git bisect bad` to identify current commit as bad/good
+6. git will loop back to step 4 until it identifies where the bug was introduced
+7. exit with `git bisect reset`
+
+> so essentially, it handles picking commits in an optimal order to ensure that you can check each one most efficiently. The actual checking, though, is done manually. That makes sense! ty binary searches
+
+
+### automating the bisect
+
+a script can be given to bisect which will automatically do the testing part of the bisect
+from man:
+```
+Bisect run
+If you have a script that can tell if the current source code is good or bad, you can
+bisect by issuing the command:
+
+   $ git bisect run my_script arguments
+
+Note that the script (my_script in the above example) should exit with code 0 if the
+current source code is good/old, and exit with a code between 1 and 127 (inclusive),
+except 125, if the current source code is bad/new.
+```
+
+after step 3, do the command shown above to automate it. That command will execute for every bisect selection
