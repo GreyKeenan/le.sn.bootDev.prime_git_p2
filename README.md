@@ -1,5 +1,5 @@
 
-# GreyKeenan/le.sn.bootDev.prime_git_2
+# GreyKeenan/le.sn.bootDev.prime_git_p2
 
 > second part of the course. Part one at: GreyKeenan/le.sn.bootDev.prime_git
 
