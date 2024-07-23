@@ -11,11 +11,12 @@ following [this boot.dev course](https://www.boot.dev/courses/learn-git-2)
 This second part of the course was really helpful for me. Id brushed up against most of these concepts occasionally when trying to use git, but I was always lacking a fundamental understanding of them to use them beyong just copy/pasting. This has changed things
 
 The only things I really knew about before this were:
-	- forking
-	- that conflicts happen, but not really how to address them confidently
-	- stashing
-	- squashing, generally
-	- cherry-pick, vaguely
+
+- forking
+- that conflicts happen, but not really how to address them confidently
+- stashing
+- squashing, generally
+- cherry-pick, vaguely
 
 I feel a lot more confident in my ability to navigate around a repository. Though I still need to put working-with-a-team-in-git into practice, I at least know how to start approaching it when the time comes.
 
